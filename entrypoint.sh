@@ -32,7 +32,9 @@ function main {
 
   shift $(( OPTIND - 1 ))
 
-  for in_file in $@; do
+  files=("$@")
+
+  for in_file in "${files[@]}"; do
     if [[ -f "${in_file}" ]]; then
       printf "Attempting compile of: %s\n" "${in_file}"
 
@@ -151,7 +153,7 @@ function c_md_mermaid {
 
 # $1 name to be dasherized
 function dasherize_name {
-  local result=$(echo "${1}" | sed -e 's/\./-/g' | sed -e 's;/;_;g')
+  local result=$(echo "${1}" | sed -e 's/ /-/g' | sed -e 's/\./-/g' | sed -e 's;/;_;g')
   echo "${result}"
 }
 
